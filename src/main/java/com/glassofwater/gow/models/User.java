@@ -3,7 +3,6 @@ package com.glassofwater.gow.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,8 +17,6 @@ public class User {
 
     @Email
     private String email;
-
-//    private List<Challenge> challenges;
 
     public User() {
     }

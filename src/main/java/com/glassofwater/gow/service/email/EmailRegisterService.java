@@ -1,6 +1,5 @@
-package com.glassofwater.gow.service.impl;
+package com.glassofwater.gow.service.email;
 
-import com.glassofwater.gow.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -10,13 +9,13 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailRegisterService implements EmailRegister {
 
 
     private final JavaMailSender emailSender;
 
     @Autowired
-    public EmailServiceImpl(JavaMailSender emailSender) {
+    public EmailRegisterService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 
@@ -25,6 +24,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage message = this.emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
+            helper.setFrom("HUI");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text);

@@ -1,29 +1,29 @@
 package com.glassofwater.gow.service;
 
 import com.glassofwater.gow.models.User;
+import com.glassofwater.gow.service.email.EmailRegister;
+import com.glassofwater.gow.service.repositories.user.register.UserRepoRegister;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class SchedulerService {
 
-    private final UserRepositoryService userService;
+    private final UserRepoRegister userService;
 
-    private final EmailService emailService;
+    private final EmailRegister emailService;
 
     @Autowired
-    public SchedulerService(UserRepositoryService userService, EmailService emailService) {
+    public SchedulerService(UserRepoRegister userService, EmailRegister emailService) {
         this.userService = userService;
         this.emailService = emailService;
     }
 
-    @Scheduled
+    //@Scheduled
     public void sendMailToUsers(){
-        List<User> list = userService.getAll();
+        List<User> list = null;
         if (!list.isEmpty()) {
             list.forEach(user -> {
                 try {

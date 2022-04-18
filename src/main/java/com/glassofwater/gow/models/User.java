@@ -1,6 +1,6 @@
 package com.glassofwater.gow.models;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -8,7 +8,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users_table")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

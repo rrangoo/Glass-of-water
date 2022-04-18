@@ -1,0 +1,1 @@
+web: java -jar target/gow-1.0.jar

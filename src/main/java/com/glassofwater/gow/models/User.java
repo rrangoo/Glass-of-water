@@ -16,5 +16,5 @@ public class User {
 
     private String username;
     private String email;
-    private int rate;
+    //private int rate;
 }

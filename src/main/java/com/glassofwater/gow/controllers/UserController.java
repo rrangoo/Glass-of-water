@@ -28,11 +28,6 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("greet")
-    public String getUser(){
-        return "Я тебя люблю) С праздничком";
-    }
-
     @PostMapping
     public User create(@RequestBody User user){
         return userRepo.save(user);

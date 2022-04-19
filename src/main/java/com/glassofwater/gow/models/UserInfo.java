@@ -1,20 +1,21 @@
 package com.glassofwater.gow.models;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users_table")
+@Table(name = "users_info")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String username;
     private String email;
-    private int rate;
+    private String code;
 }

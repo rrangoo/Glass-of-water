@@ -23,8 +23,8 @@ public class AuthController {
     }
 
     @GetMapping("users")
-    public List<UserInfo> getUsers(){
-        return authService.getUsersInfo();
+    public List<User> getUsers(){
+        return authService.getUsers();
     }
 
     @GetMapping("infos")

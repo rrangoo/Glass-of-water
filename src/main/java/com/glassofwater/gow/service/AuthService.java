@@ -7,6 +7,7 @@ import com.glassofwater.gow.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -55,5 +56,13 @@ public class AuthService {
         } else {
             return null;
         }
+    }
+
+    public List<User> getUsers(){
+        return userRepo.findAll();
+    }
+
+    public List<UserInfo> getUsersInfo(){
+        return userInfoRepo.findAll();
     }
 }

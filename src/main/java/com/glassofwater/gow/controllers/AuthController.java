@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("auth")
 public class AuthController {
@@ -18,6 +20,16 @@ public class AuthController {
 
     public AuthController(@Autowired AuthService authService) {
         this.authService = authService;
+    }
+
+    @GetMapping("users")
+    public List<User> getUsers(){
+        return authService.getUsers();
+    }
+
+    @GetMapping("infos")
+    public List<UserInfo> getUsersInfo(){
+        return authService.getUsersInfo();
     }
 
     @PostMapping("/email")

@@ -1,11 +1,10 @@
 package com.glassofwater.gow.controllers;
 
+import com.glassofwater.gow.models.Email;
 import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.service.AuthService;
-import com.glassofwater.gow.models.Email;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
@@ -33,15 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<String> createUserInfo(@RequestBody Email email) {
-
-        try {
-            authService.create(email.getEmail());
-        } catch (MailException e) {
-            return ResponseEntity.ok("Email not found!");
-        }
-
-        return ResponseEntity.ok("Email sent!");
+    public ResponseEntity<Boolean> createUserInfo(@RequestBody Email email) {
+        return ResponseEntity.ok(authService.create(email.getEmail()));
     }
 
     @PostMapping("/code")

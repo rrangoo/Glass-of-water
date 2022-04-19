@@ -22,7 +22,7 @@ public class AuthService {
     MailService mailService;
 
 
-    public void create(String email){
+    public boolean create(String email){
         String code = Integer.toString(new Random().nextInt(9000) + 1000);
         UserInfo tmp = new UserInfo();
 
@@ -31,6 +31,9 @@ public class AuthService {
 
         if (mailService.sendMessage(email, code)){
             userInfoRepo.save(tmp);
+            return true;
+        } else {
+            return false;
         }
     }
 

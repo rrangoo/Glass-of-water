@@ -5,8 +5,6 @@ import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.repository.UserInfoRepo;
 import com.glassofwater.gow.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -31,9 +29,8 @@ public class AuthService {
         tmp.setCode(code);
 
         if (mailService.sendMessage(email, code)){
-
+            userInfoRepo.save(tmp);
         }
-        userInfoRepo.save(tmp);
     }
 
     public User confirm(UserInfo userInfo){
@@ -44,12 +41,11 @@ public class AuthService {
         }
 
         if (currentUserInfo.getCode().equals(userInfo.getCode())){
-            User user = new User();
-            user.setEmail(userInfo.getEmail());
+            User user = userRepo.findByEmail(userInfo.getEmail());
 
-            User tmpUser = userRepo.findByEmail(userInfo.getEmail());
-
-            if (tmpUser == null){
+            if (user == null){
+                user = new User();
+                user.setEmail(userInfo.getEmail());
                 userRepo.save(user);
             }
 

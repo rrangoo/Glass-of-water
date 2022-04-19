@@ -1,6 +1,5 @@
 package com.glassofwater.gow.service;
 
-import com.glassofwater.gow.models.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;

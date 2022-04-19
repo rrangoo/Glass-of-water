@@ -49,4 +49,9 @@ public class AuthController {
         User newUser = authService.confirm(userInfo);
         return ResponseEntity.ok(newUser);
     }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") UserInfo userInfo){
+        authService.delete(userInfo);
+    }
 }

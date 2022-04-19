@@ -65,4 +65,8 @@ public class AuthService {
     public List<UserInfo> getUsersInfo(){
         return userInfoRepo.findAll();
     }
+
+    public void delete(UserInfo userInfo){
+        userInfoRepo.delete(userInfo);
+    }
 }

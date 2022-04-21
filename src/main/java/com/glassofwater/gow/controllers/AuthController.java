@@ -6,7 +6,6 @@ import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

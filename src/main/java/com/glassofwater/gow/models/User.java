@@ -3,6 +3,7 @@ package com.glassofwater.gow.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users_table")
@@ -17,4 +18,7 @@ public class User {
     private String username;
     private String email;
     private Integer rate;
+
+    @ManyToMany
+    private List<User> friends;
 }

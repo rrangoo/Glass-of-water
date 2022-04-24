@@ -4,6 +4,7 @@ import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.repository.UserInfoRepo;
 import com.glassofwater.gow.repository.UserRepo;
+import com.glassofwater.gow.util.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class AuthService {
     MailService mailService;
 
 
-    public boolean create(String email){
+    public Status create(String email){
         String code = Integer.toString(new Random().nextInt(9000) + 1000);
         UserInfo tmp = new UserInfo();
 
@@ -31,13 +32,37 @@ public class AuthService {
 
         if (mailService.sendMessage(email, code)){
             userInfoRepo.save(tmp);
-            return true;
+            return new Status("success");
         } else {
-            return false;
+            return new Status("failed");
         }
     }
 
-    public User confirm(UserInfo userInfo){
+//    public User confirm(UserInfo userInfo){
+//        UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
+//
+//        if (currentUserInfo == null){
+//            return null;
+//        }
+//
+//        if (currentUserInfo.getCode().equals(userInfo.getCode())){
+//            User user = userRepo.findByEmail(userInfo.getEmail());
+//
+//            if (user == null){
+//                user = new User();
+//                user.setEmail(userInfo.getEmail());
+//                userRepo.save(user);
+//            }
+//
+//            userInfoRepo.delete(currentUserInfo);
+//
+//            return user;
+//        } else {
+//            return null;
+//        }
+//    }
+
+    public Status confirm(UserInfo userInfo){
         UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
 
         if (currentUserInfo == null){
@@ -55,9 +80,9 @@ public class AuthService {
 
             userInfoRepo.delete(currentUserInfo);
 
-            return user;
+            return new Status("success");
         } else {
-            return null;
+            return new Status("failed");
         }
     }
 

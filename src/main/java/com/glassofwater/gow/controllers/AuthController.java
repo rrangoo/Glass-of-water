@@ -4,6 +4,7 @@ import com.glassofwater.gow.models.Email;
 import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.service.AuthService;
+import com.glassofwater.gow.util.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +32,19 @@ public class AuthController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<Boolean> createUserInfo(@RequestBody Email email) {
+    public ResponseEntity<Status> createUserInfo(@RequestBody Email email) {
         return ResponseEntity.ok(authService.create(email.getEmail()));
     }
 
+//    @PostMapping("/code")
+//    public ResponseEntity<User> auth(@RequestBody UserInfo userInfo) {
+//        User newUser = authService.confirm(userInfo);
+//        return ResponseEntity.ok(newUser);
+//    }
     @PostMapping("/code")
-    public ResponseEntity<User> auth(@RequestBody UserInfo userInfo) {
-        User newUser = authService.confirm(userInfo);
-        return ResponseEntity.ok(newUser);
+    public ResponseEntity<Status> auth(@RequestBody UserInfo userInfo) {
+        Status status = authService.confirm(userInfo);
+        return ResponseEntity.ok(status);
     }
 
     @DeleteMapping("{id}")

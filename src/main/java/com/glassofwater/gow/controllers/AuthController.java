@@ -5,9 +5,8 @@ import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.service.AuthService;
 import com.glassofwater.gow.util.AuthStatus;
+import com.glassofwater.gow.util.Pair;
 import com.glassofwater.gow.util.Status;
-import com.sun.tools.javac.util.Pair;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +45,7 @@ public class AuthController {
 //    }
     @PostMapping("/code")
     public ResponseEntity<Pair<AuthStatus, User>> auth(@RequestBody UserInfo userInfo) {
-        var response = authService.confirm(userInfo);
+        Pair<AuthStatus, User> response = authService.confirm(userInfo);
         return ResponseEntity.ok(response);
     }
 

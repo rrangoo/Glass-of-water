@@ -23,6 +23,10 @@ public class AuthService {
     MailService mailService;
 
 
+    /**
+     * @param email Адрес почты пользователя.
+     * @return "success" - если сообщение с кодом удолось отправить на данный адрес.
+     */
     public Status create(String email){
         String code = Integer.toString(new Random().nextInt(9000) + 1000);
         UserInfo tmp = new UserInfo();
@@ -31,6 +35,10 @@ public class AuthService {
         tmp.setCode(code);
 
         if (mailService.sendMessage(email, code)){
+            UserInfo currentUserInfo = userInfoRepo.getByEmail(email);
+            if (currentUserInfo != null){
+                userInfoRepo.delete(currentUserInfo);
+            }
             userInfoRepo.save(tmp);
             return new Status("success");
         } else {
@@ -66,7 +74,7 @@ public class AuthService {
         UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
 
         if (currentUserInfo == null){
-            return null;
+            return new Status("failed");
         }
 
         if (currentUserInfo.getCode().equals(userInfo.getCode())){

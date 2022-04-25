@@ -4,7 +4,10 @@ import com.glassofwater.gow.models.Email;
 import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.service.AuthService;
+import com.glassofwater.gow.util.AuthStatus;
 import com.glassofwater.gow.util.Status;
+import com.sun.tools.javac.util.Pair;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +45,9 @@ public class AuthController {
 //        return ResponseEntity.ok(newUser);
 //    }
     @PostMapping("/code")
-    public ResponseEntity<Status> auth(@RequestBody UserInfo userInfo) {
-        Status status = authService.confirm(userInfo);
-        return ResponseEntity.ok(status);
+    public ResponseEntity<Pair<AuthStatus, User>> auth(@RequestBody UserInfo userInfo) {
+        var response = authService.confirm(userInfo);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("{id}")

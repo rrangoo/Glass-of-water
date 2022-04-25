@@ -4,7 +4,9 @@ import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.models.UserInfo;
 import com.glassofwater.gow.repository.UserInfoRepo;
 import com.glassofwater.gow.repository.UserRepo;
+import com.glassofwater.gow.util.AuthStatus;
 import com.glassofwater.gow.util.Status;
+import com.sun.tools.javac.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,11 +72,11 @@ public class AuthService {
 //        }
 //    }
 
-    public Status confirm(UserInfo userInfo){
+    public Pair<AuthStatus, User> confirm(UserInfo userInfo){
         UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
 
         if (currentUserInfo == null){
-            return new Status("failed");
+            return new Pair<>(AuthStatus.failed, null);
         }
 
         if (currentUserInfo.getCode().equals(userInfo.getCode())){
@@ -88,9 +90,9 @@ public class AuthService {
 
             userInfoRepo.delete(currentUserInfo);
 
-            return new Status("success");
+            return new Pair<>(AuthStatus.success, user);
         } else {
-            return new Status("failed");
+            return new Pair<>(AuthStatus.failed, null);
         }
     }
 

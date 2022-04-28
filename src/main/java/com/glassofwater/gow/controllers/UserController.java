@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,10 @@ public class UserController {
 
     @PostMapping
     public User create(@RequestBody User user){
+        user.setRate(0);
+        user.setUsername("a");
+        user.setFriends(new ArrayList<>());
+
         return userRepo.save(user);
     }
 

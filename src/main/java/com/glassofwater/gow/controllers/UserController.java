@@ -31,9 +31,7 @@ public class UserController {
 
     @PostMapping
     public User create(@RequestBody User user){
-        user.setRate(0);
-        user.setUsername(user.getEmail().split("@")[0]);
-        user.setFriends(new ArrayList<>());
+
 
         return userRepo.save(user);
     }

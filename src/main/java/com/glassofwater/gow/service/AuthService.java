@@ -9,6 +9,7 @@ import com.glassofwater.gow.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -84,6 +85,9 @@ public class AuthService {
             if (user == null){
                 user = new User();
                 user.setEmail(userInfo.getEmail());
+                user.setRate(0);
+                user.setUsername(user.getEmail().split("@")[0]);
+                user.setFriends(new ArrayList<>());
                 userRepo.save(user);
             }
 

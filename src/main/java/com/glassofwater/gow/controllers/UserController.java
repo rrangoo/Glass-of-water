@@ -46,6 +46,20 @@ public class UserController {
         userRepo.save(user);
     }
 
+    @DeleteMapping("{id}/trips")
+    public void deleteTrip(@PathVariable("id") User user){
+        List<Long> ids = new ArrayList<>();
+        for (Trip trip : user.getTrips()){
+            ids.add(trip.getId());
+        }
+        user.getTrips().removeAll(user.getTrips());
+        userRepo.save(user);
+
+        for (Long id : ids){
+            tripRepo.deleteById(id);
+        }
+    }
+
     @PostMapping
     public User create(@RequestBody User user){
         return userRepo.save(user);

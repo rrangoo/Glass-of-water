@@ -19,7 +19,7 @@ public class Trip {
 
     private Integer rate;
     private Integer countOfGlasses;
-    private Integer time;
+    private String time;
     private Integer averageSpeed;
     private String startTime;
 }

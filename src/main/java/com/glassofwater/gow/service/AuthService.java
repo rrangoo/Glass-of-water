@@ -48,30 +48,6 @@ public class AuthService {
         }
     }
 
-//    public User confirm(UserInfo userInfo){
-//        UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
-//
-//        if (currentUserInfo == null){
-//            return null;
-//        }
-//
-//        if (currentUserInfo.getCode().equals(userInfo.getCode())){
-//            User user = userRepo.findByEmail(userInfo.getEmail());
-//
-//            if (user == null){
-//                user = new User();
-//                user.setEmail(userInfo.getEmail());
-//                userRepo.save(user);
-//            }
-//
-//            userInfoRepo.delete(currentUserInfo);
-//
-//            return user;
-//        } else {
-//            return null;
-//        }
-//    }
-
     public Pair<AuthStatus, User> confirm(UserInfo userInfo){
         UserInfo currentUserInfo = userInfoRepo.getByEmail(userInfo.getEmail());
 
@@ -87,7 +63,7 @@ public class AuthService {
                 user.setEmail(userInfo.getEmail());
                 user.setRate(0);
                 user.setUsername(user.getEmail().split("@")[0]);
-                user.setFriends(new ArrayList<>());
+                user.setTrips(new ArrayList<>());
                 userRepo.save(user);
             }
 

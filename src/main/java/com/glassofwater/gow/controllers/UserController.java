@@ -1,6 +1,8 @@
 package com.glassofwater.gow.controllers;
 
+import com.glassofwater.gow.models.Trip;
 import com.glassofwater.gow.models.User;
+import com.glassofwater.gow.repository.TripRepo;
 import com.glassofwater.gow.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +15,12 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
     private final UserRepo userRepo;
+    private final TripRepo tripRepo;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
+    public UserController(UserRepo userRepo, TripRepo tripRepo) {
         this.userRepo = userRepo;
-    }
-
-    @GetMapping
-    public List<User> getUsers(){
-        return userRepo.findAll();
+        this.tripRepo = tripRepo;
     }
 
     @GetMapping("{id}")
@@ -29,10 +28,26 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("{id}/trips")
+    public List<Trip> getTrips(@PathVariable("id") User user){
+        return user.getTrips();
+    }
+
+    @GetMapping("{id}/trips/{tripId}")
+    public Trip getTrip(@PathVariable("id") User user,
+                        @PathVariable("tripId") Trip trip){
+        return trip;
+    }
+
+    @PostMapping("{id}/trips")
+    public void createTrip(@PathVariable("id") User user, @RequestBody Trip trip){
+        user.getTrips().add(trip);
+        tripRepo.save(trip);
+        userRepo.save(user);
+    }
+
     @PostMapping
     public User create(@RequestBody User user){
-
-
         return userRepo.save(user);
     }
 

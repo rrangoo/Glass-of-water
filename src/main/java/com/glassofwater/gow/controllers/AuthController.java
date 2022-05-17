@@ -37,12 +37,6 @@ public class AuthController {
     public ResponseEntity<Status> createUserInfo(@RequestBody Email email) {
         return ResponseEntity.ok(authService.create(email.getEmail()));
     }
-
-//    @PostMapping("/code")
-//    public ResponseEntity<User> auth(@RequestBody UserInfo userInfo) {
-//        User newUser = authService.confirm(userInfo);
-//        return ResponseEntity.ok(newUser);
-//    }
     @PostMapping("/code")
     public ResponseEntity<Pair<AuthStatus, User>> auth(@RequestBody UserInfo userInfo) {
         Pair<AuthStatus, User> response = authService.confirm(userInfo);

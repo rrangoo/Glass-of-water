@@ -19,6 +19,6 @@ public class User {
     private String email;
     private Integer rate;
 
-    @ManyToMany
-    private List<User> friends;
+    @OneToMany
+    private List<Trip> trips;
 }

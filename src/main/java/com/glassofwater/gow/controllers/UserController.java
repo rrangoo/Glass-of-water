@@ -70,7 +70,8 @@ public class UserController {
             @PathVariable("id") User userFromDb,
             @RequestBody User user
     ){
-        BeanUtils.copyProperties(user, userFromDb, "id");
+        //BeanUtils.copyProperties(user, userFromDb, "id");
+        userFromDb.setRate(user.getRate());
         return userRepo.save(userFromDb);
     }
 

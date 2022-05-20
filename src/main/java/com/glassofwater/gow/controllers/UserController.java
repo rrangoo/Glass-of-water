@@ -4,7 +4,6 @@ import com.glassofwater.gow.models.Trip;
 import com.glassofwater.gow.models.User;
 import com.glassofwater.gow.repository.TripRepo;
 import com.glassofwater.gow.repository.UserRepo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,7 +69,6 @@ public class UserController {
             @PathVariable("id") User userFromDb,
             @RequestBody User user
     ){
-        //BeanUtils.copyProperties(user, userFromDb, "id");
         userFromDb.setRate(user.getRate());
         return userRepo.save(userFromDb);
     }
